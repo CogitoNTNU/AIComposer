@@ -21,15 +21,32 @@ def main():
     screen = pygame.display.set_mode([800, 400])
 
     running = True
-
+    width = screen.get_width()
+  
+# stores the height of the
+# screen into a variable
+    height = screen.get_height()
+    color_dark = (100,100,100)
+    filePlaying = True
     while running:
-
+        screen.fill((255, 255, 255))
+        pygame.draw.rect(screen, color_dark, [width/2,height*0.9,140,40])
         for event in pygame.event.get():
 
             if event.type == pygame.QUIT:
                 running = False
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if width/2 <= mouse[0] <= width/2+140 and height*0.9 <= mouse[1] <= height*0.9+40:
+                    if filePlaying:
+                        pygame.mixer.music.pause() 
+                        filePlaying = False
+                    else:
+                        pygame.mixer.music.unpause()
+                        filePlaying = True 
+                pass
+        mouse = pygame.mouse.get_pos()       
 
-        screen.fill((255, 255, 255))
+       
 
 
         pygame.display.flip()
