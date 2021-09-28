@@ -2,6 +2,9 @@ from typing import List
 from pathlib import Path
 
 
+
+
+
 def get_midi_files(folder_path: str) -> List[str]:
     """Gets a list of midi file paths in the given folder, recursively"""
 
@@ -16,3 +19,6 @@ if __name__ == "__main__":
     midi_files = get_midi_files("./midi_filer")
     for midi_file in midi_files:
         print(midi_file)
+
+
+
