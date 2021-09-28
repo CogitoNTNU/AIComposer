@@ -5,8 +5,8 @@ def list_of_instruments(midi):
     part_of_stream=midi.parts.stream()
     all_instu=[]
     for inst in part_of_stream:
-        aux=inst;
-        all_instu.append(aux);
+
+        all_instu.append(inst.partName);
     return all_instu
 
 
