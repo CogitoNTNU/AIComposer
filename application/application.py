@@ -10,7 +10,7 @@ def main():
     # optional volume 0 to 1.0
     pygame.mixer.music.set_volume(0.8)
     try:
-        pygame.mixer.music.load("HotelCalifornia.mid")
+        pygame.mixer.music.load("application/HotelCalifornia.mid")
     
     except:
         pass
