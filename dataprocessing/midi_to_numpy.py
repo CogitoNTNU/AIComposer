@@ -1,4 +1,2 @@
-import mido
+import music21 as m21
 
-mid = mido.MidiFile("..\midi_filer\Fur Elise.mid", clip="True")
-print(mid.tracks)
