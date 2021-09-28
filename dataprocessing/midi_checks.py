@@ -1,20 +1,27 @@
 from music21 import converter, corpus, instrument, midi, note, chord, pitch
 
-def is_piano(file):
-    instruments = instrument.partitionByInstrument(file)
-    for ins in instruments.recurse().parts:
-        if ins.partName == "Piano":
-            print("piano")
-            return True
-    print("nope")
-    return False
+#list of all instruments in file
+def list_of_instruments(midi):
+    part_of_stream=midi.parts.stream()
+    all_instu=[]
+    for inst in part_of_stream:
+        aux=inst;
+        all_instu.append(aux);
+    return all_instu
 
-fil = converter.parse("..\midi_filer\March of the Trolls.mid")
 
-is_piano(fil)
+# open midi file
+def open_midi(path):
+    midi_file=midi.midiFile()
+    midi_file.open(path)
+    midi_file.read()
+    return midi.translate.midiFileToStream(midi_file)
 
-#instrumentPart = instrument.partitionByInstrument(file)
 
-#print(len(instrumentPart.recurse().parts))
-#
+#checking if piano is there.Boolean function
+def correct_file(all_instu):
+    for i in range(len(all_instu)):
+        if(all_instu[i]!="Piano" or all_instu[i]!="None"):
+            return False
+    return True
 
