@@ -1,7 +1,17 @@
 import pygame
-
+from pygame import midi
 
 def main():
+    with open("HotelCalifornia.mid", "r") as f:
+        midiFile = f
+
+    try:
+        pygame.mixer.music.load(midiFile)
+    
+    except:
+        pass
+    
+    pygame.mixer.music.play()
     pygame.init()
 
     screen = pygame.display.set_mode([800, 400])
