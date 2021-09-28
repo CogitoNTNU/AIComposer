@@ -2,11 +2,15 @@ import pygame
 from pygame import midi
 
 def main():
-    with open("HotelCalifornia.mid", "r") as f:
-        midiFile = f
-
+    freq = 44100  # audio CD quality
+    bitsize = -16  # unsigned 16 bit
+    channels = 2  # 1 is mono, 2 is stereo
+    buffer = 1024  # number of samples
+    pygame.mixer.init(freq, bitsize, channels, buffer)
+    # optional volume 0 to 1.0
+    pygame.mixer.music.set_volume(0.8)
     try:
-        pygame.mixer.music.load(midiFile)
+        pygame.mixer.music.load("HotelCalifornia.mid")
     
     except:
         pass
