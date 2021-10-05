@@ -7,6 +7,9 @@ import matplotlib.pyplot as plt
 
 NUM_NOTES = 128
 Q_RATIO = 4
+NOTE_IND = 0
+FROM_PREV_IND = 1
+VEL_IND = 2
 
 if __name__ == "__main__":
     midi_files = get_midi_files("../midi_filer")
@@ -43,9 +46,9 @@ if __name__ == "__main__":
 
                 stop_ind = arr_ind + int(duration.quarterLength * Q_RATIO)
 
-                test_arr[arr_ind:stop_ind, pitch, 0] = 1
-                test_arr[arr_ind + 1:stop_ind, pitch, 1] = 1
-                test_arr[arr_ind:stop_ind, pitch, 2] = vol
+                test_arr[arr_ind:stop_ind, pitch, NOTE_IND] = 1
+                test_arr[arr_ind + 1:stop_ind, pitch, FROM_PREV_IND] = 1
+                test_arr[arr_ind:stop_ind, pitch, VEL_IND] = vol
 
                 arr_ind = stop_ind
 
@@ -56,16 +59,16 @@ if __name__ == "__main__":
                     pitch = n.pitch.midi
                     vol = n.volume.realized
 
-                    test_arr[arr_ind:stop_ind, pitch, 0] = 1
-                    test_arr[arr_ind + 1:stop_ind, pitch, 1] = 1
-                    test_arr[arr_ind:stop_ind, pitch, 2] = vol
+                    test_arr[arr_ind:stop_ind, pitch, NOTE_IND] = 1
+                    test_arr[arr_ind + 1:stop_ind, pitch, FROM_PREV_IND] = 1
+                    test_arr[arr_ind:stop_ind, pitch, VEL_IND] = vol
 
                 arr_ind = stop_ind
 
             else:
                 arr_ind += int(duration.quarterLength * Q_RATIO)
 
-    plt.imshow(test_arr[:,:,0].T, interpolation="none")
+    plt.imshow(test_arr[:, :, NOTE_IND].T, interpolation="none")
     plt.show()
 
     # file.plot()
