@@ -10,7 +10,7 @@ Q_RATIO = 4
 
 if __name__ == "__main__":
     midi_files = get_midi_files("../midi_filer")
-    midi_file = midi_files[0]
+    midi_file = midi_files[1]
     print(midi_file)
     file = converter.parse(midi_file)
 
@@ -28,7 +28,7 @@ if __name__ == "__main__":
     print(durations)
 
     time_steps = int(durations[0].quarterLength * Q_RATIO)
-    test_arr = np.zeros((time_steps, NUM_NOTES))
+    test_arr = np.zeros((time_steps, NUM_NOTES, 3))
 
     for instr in instruments:
         arr_ind = 0
@@ -39,9 +39,14 @@ if __name__ == "__main__":
 
             if type(thisNote) == note.Note:
                 pitch = thisNote.pitch.midi
+                vol = thisNote.volume.realized
 
                 stop_ind = arr_ind + int(duration.quarterLength * Q_RATIO)
-                test_arr[arr_ind:stop_ind, pitch] = 1
+
+                test_arr[arr_ind:stop_ind, pitch, 0] = 1
+                test_arr[arr_ind + 1:stop_ind, pitch, 1] = 1
+                test_arr[arr_ind:stop_ind, pitch, 2] = vol
+
                 arr_ind = stop_ind
 
             if type(thisNote) == chord.Chord:
@@ -49,14 +54,18 @@ if __name__ == "__main__":
 
                 for n in thisNote.notes:
                     pitch = n.pitch.midi
-                    test_arr[arr_ind:stop_ind, pitch] = 1
+                    vol = n.volume.realized
+
+                    test_arr[arr_ind:stop_ind, pitch, 0] = 1
+                    test_arr[arr_ind + 1:stop_ind, pitch, 1] = 1
+                    test_arr[arr_ind:stop_ind, pitch, 2] = vol
 
                 arr_ind = stop_ind
 
             else:
                 arr_ind += int(duration.quarterLength * Q_RATIO)
 
-    plt.imshow(test_arr.T, interpolation="none")
+    plt.imshow(test_arr[:,:,0].T, interpolation="none")
     plt.show()
 
     # file.plot()
