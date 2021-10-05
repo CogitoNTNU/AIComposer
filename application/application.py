@@ -1,5 +1,6 @@
 import pygame
 from pygame import midi
+from mido import MidiFile
 
 
 def main():
@@ -12,9 +13,10 @@ def main():
     pygame.mixer.music.set_volume(0.8)
     try:
         pygame.mixer.music.load("application/HotelCalifornia.mid")
-
-    except:
-        pass
+        mid = MidiFile('application/HotelCalifornia.mid')
+        song_length = mid.length
+    except Exception as e:
+        print(e)
 
     pygame.mixer.music.play()
     pygame.init()
@@ -51,9 +53,7 @@ def main():
                     else:
                         pygame.mixer.music.unpause()
                         filePlaying = True
-                pass
         mouse = pygame.mouse.get_pos()
-
         pygame.display.flip()
 
     pygame.quit()
