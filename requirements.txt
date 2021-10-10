@@ -3,3 +3,5 @@ music21
 pandas
 numpy
 matplotlib
+mido
+pygame
