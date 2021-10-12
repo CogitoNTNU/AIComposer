@@ -1,2 +1,7 @@
 pylint
 mido
+tensorflow
+numpy
+music21
+glob
+keras
