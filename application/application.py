@@ -2,6 +2,9 @@ import pygame
 from pygame import midi
 from mido import MidiFile
 
+filename = "E:\projects\AIComposer\dataprocessing\..\midi_filer\8.mid"
+filename = "test_output.mid"
+filename = "E:\projects\AIComposer\dataprocessing\..\midi_filer\AT.mid"
 
 def main():
     freq = 44100  # audio CD quality
@@ -12,8 +15,8 @@ def main():
     # optional volume 0 to 1.0
     pygame.mixer.music.set_volume(0.8)
     try:
-        pygame.mixer.music.load("application/HotelCalifornia.mid")
-        mid = MidiFile('application/HotelCalifornia.mid')
+        pygame.mixer.music.load(filename)
+        mid = MidiFile(filename)
         song_length = mid.length
     except Exception as e:
         print(e)

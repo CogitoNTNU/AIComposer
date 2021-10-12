@@ -5,3 +5,5 @@ numpy
 matplotlib
 mido
 pygame
+opencv-python
+tensorflow
