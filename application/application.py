@@ -1,4 +1,6 @@
 import pygame
+import timeit
+import time
 from pygame import midi
 from mido import MidiFile
 
@@ -15,6 +17,7 @@ def main():
         pygame.mixer.music.load("application/HotelCalifornia.mid")
         mid = MidiFile('application/HotelCalifornia.mid')
         song_length = mid.length
+        print(song_length)
     except Exception as e:
         print(e)
 
@@ -34,11 +37,25 @@ def main():
     start_button_height = 100
     start_button_x = int(width / 2 - start_button_width/2)
     start_button_y = int(height / 2 - start_button_height/2)
-
+    
+    # progressBar
+    barY = 50
+    barX = 400
     color_dark = (100, 100, 100)
     filePlaying = True
+    timerInit = True
     while running:
+        if timerInit:
+            starter = time.time()
+            timerInit = False
+        if filePlaying:
+            total = time.time()
+            progress = ((total-starter)*100)/song_length
+            progress = progress/100
+            
         screen.fill((255, 255, 255))
+        pygame.draw.rect(screen, color_dark, [width*0.1, height*0.85, barX, barY], 2 )
+        pygame.draw.rect(screen, color_dark, [width*0.1, height*0.85, (barX*progress), barY])
         screen.blit(start_button, (start_button_x, start_button_y))
         for event in pygame.event.get():
 
@@ -53,6 +70,7 @@ def main():
                     else:
                         pygame.mixer.music.unpause()
                         filePlaying = True
+                        starter = time.time() - (total-starter)
         mouse = pygame.mouse.get_pos()
         pygame.display.flip()
 
