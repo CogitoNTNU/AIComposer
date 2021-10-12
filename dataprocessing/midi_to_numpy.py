@@ -8,14 +8,13 @@ import os
 from config import NUM_NOTES, Q_RATIO, NOTE_IND, FROM_PREV_IND, \
     VEL_IND, NOTE_IMAGE_FILE_FOLDER
 
-
-def convert_with_index(index, **kwargs):
-    midi_files = get_midi_files("../midi_filer")
-    midi_file = midi_files[index]
-    return convert_file(midi_file, **kwargs)
-
-
 def convert_file(filename, save_note_image=False):
+    """
+    Converts a midi file to numpy
+    :param filename: the midi file to convert
+    :param save_note_image: whether to save the numpy arrays as an image or not
+    :return: A numpy array that represents the midi file
+    """
     file = converter.parse(filename)
     instruments = file.parts
     time_signs = []
