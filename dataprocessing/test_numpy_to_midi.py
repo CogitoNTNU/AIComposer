@@ -16,4 +16,4 @@ def numpy_to_midi(array, output_path='test_output.mid'):
     for i, time_step in enumerate(array):
         print(i, sum(time_step))
 
-numpy_to_midi("..\midi_filer")
+numpy_to_midi("..\")
