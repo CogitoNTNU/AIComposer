@@ -1,7 +1,10 @@
 pylint
-mido
-tensorflow
-numpy
 music21
-glob
+pandas
+numpy
+matplotlib
+mido
 keras
+pygame
+opencv-python
+tensorflow
