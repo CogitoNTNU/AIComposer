@@ -3,6 +3,7 @@ from music21 import converter, instrument, midi, note
 from find_midi_files import get_midi_files
 import numpy as np
 import matplotlib.pyplot as plt
+import cv2
 
 
 NUM_NOTES = 128
@@ -68,7 +69,14 @@ if __name__ == "__main__":
             else:
                 arr_ind += int(duration.quarterLength * Q_RATIO)
 
+    out = cv2.resize(test_arr, (1024, 2048), interpolation=cv2.INTER_NEAREST)
+
+    cv2.imshow("test", out)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
     plt.imshow(test_arr[:, :, NOTE_IND].T, interpolation="none")
+    plt.imshow(out, interpolation="none")
     plt.show()
 
     # file.plot()
