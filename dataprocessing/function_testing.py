@@ -19,7 +19,8 @@ print(second_arr.shape)
 
 first_notes = first_arr[:,:,0]
 second_notes = second_arr[:,:,0]
-
+cv2.imwrite("1.png", first_notes.T*255.)
+cv2.imwrite("2.png", second_notes.T*255.)
 note_comp = comparison[:,:,0]
 
 for i in range(len(note_comp)):
