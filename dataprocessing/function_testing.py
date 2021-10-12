@@ -15,7 +15,7 @@ print(first_arr.shape)
 print("Second:")
 print(second_arr.shape)
 
-#comparison = numpy.equal(first_arr,second_arr)
+#comparison = numpy.equal(first_arr,second_arr[)
 
 first_notes = first_arr[:,:,0]
 second_notes = second_arr[:,:,0]
