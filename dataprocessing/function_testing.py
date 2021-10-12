@@ -1,9 +1,10 @@
 import numpy
 
+import cv2
 from midi_to_numpy import convert_file
 from numpy_to_midi import numpy_to_midi
 
-first_arr = convert_file("..\midi_filer\Gold_Silver_Rival_Battle.mid")
+first_arr = convert_file("..\midi_filer\OTD5YA.mid")
 
 numpy_to_midi(first_arr)
 
@@ -14,7 +15,10 @@ print(first_arr.shape)
 print("Second:")
 print(second_arr.shape)
 
-comparison = numpy.equal(first_arr,second_arr)
+#comparison = numpy.equal(first_arr,second_arr)
+
+first_notes = first_arr[:,:,0]
+second_notes = second_arr[:,:,0]
 
 note_comp = comparison[:,:,0]
 
