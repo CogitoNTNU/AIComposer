@@ -40,7 +40,7 @@ def main():
     
     # progressBar
     barY = 50
-    barX = 400
+    barX = 600
     color_dark = (100, 100, 100)
     filePlaying = True
     timerInit = True
