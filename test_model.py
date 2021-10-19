@@ -12,7 +12,7 @@ input_arr[-1, random_note ,0] = 1
 input_arr[-1, random_note ,2] = 1
 input_arr = input_arr.reshape((SEQUENCE_LENGTH-1, NUM_NOTES*3))
 
-prediction = predict(input_arr, os.path.join(MODELS_FOLDER, "model"), threshold=0.5, time_steps=99)
+prediction = predict(input_arr, os.path.join(MODELS_FOLDER, "model"), threshold=0.09, time_steps=99)
 
 prediction_reshaped = prediction.reshape((SEQUENCE_LENGTH-1, NUM_NOTES,3))
 
