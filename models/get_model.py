@@ -9,6 +9,6 @@ def get_model(input_shape, output_shape):
     model.add(Flatten())
     model.add(Dense(output_shape, activation="sigmoid"))
 
-    model.compile(loss='binary_crossentropy', optimizer='adam')
+    model.compile(loss='binary_crossentropy', optimizer='adam',  metrics=["accuracy"])
 
     return model

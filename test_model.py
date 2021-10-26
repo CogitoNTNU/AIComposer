@@ -6,13 +6,13 @@ from dataprocessing.numpy_to_midi import numpy_to_midi
 import cv2
 import random
 
-input_arr = np.zeros((SEQUENCE_LENGTH-1, NUM_NOTES,3))
+input_arr = np.ones((SEQUENCE_LENGTH-1, NUM_NOTES,3))
 random_note = random.randint(0,NUM_NOTES-1)
 input_arr[-1, random_note ,0] = 1
 input_arr[-1, random_note ,2] = 1
 input_arr = input_arr.reshape((SEQUENCE_LENGTH-1, NUM_NOTES*3))
 
-prediction = predict(input_arr, os.path.join(MODELS_FOLDER, "model"), threshold=0.09, time_steps=99)
+prediction = predict(input_arr, MODELS_FOLDER, threshold=0.09, time_steps=99)
 
 prediction_reshaped = prediction.reshape((SEQUENCE_LENGTH-1, NUM_NOTES,3))
 
