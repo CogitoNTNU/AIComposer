@@ -33,6 +33,8 @@ def convert_all_midi_files_in_folder(folder_path, output_filename="data.h5"):
 
     numpy_song_list = numpy_song_list[:,:,used_indexes,:]
 
+    with open("dataprocessing/used_note_indexes.h5", "wb") as fi:
+        np.save(fi, used_indexes)
 
     with open(output_filename, "wb") as f:
         np.save(f, numpy_song_list)
