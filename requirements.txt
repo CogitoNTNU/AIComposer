@@ -1,2 +1,10 @@
 pylint
+music21
+pandas
+numpy
+matplotlib
 mido
+keras
+pygame
+opencv-python
+tensorflow
