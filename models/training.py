@@ -6,7 +6,7 @@ from dataprocessing.generator import generator
 from tensorflow.keras.callbacks import ModelCheckpoint
 
 def train(data_filepath, epochs=1, model_filename="model"):
-    gen = generator("data.h5", batch_size=BATCH_SIZE)
+    gen = generator(data_filepath, batch_size=BATCH_SIZE)
 
     model = get_model(input_shape=(SEQUENCE_LENGTH-1, NUM_NOTES*3), output_shape=(NUM_NOTES*3))
 
