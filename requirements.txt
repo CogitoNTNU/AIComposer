@@ -7,4 +7,4 @@ mido
 keras
 pygame
 opencv-python
-tensorflow
+tensorflow==2.6.0

@@ -9,8 +9,8 @@ def predict(input_array, input_model_filepath, time_steps=1, threshold=0.5):
         output = model.predict(np.array([current_input]))
         print(np.max(output))
         output = output[0]
-        if False:#np.max(output) < threshold:
-            num_top = 3
+        if np.max(output) < threshold:
+            num_top = 12
             ind = np.argpartition(output, -num_top)[-num_top:]
             output = np.zeros(output.shape)
             output[ind] = 1
