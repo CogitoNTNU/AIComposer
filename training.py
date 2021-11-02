@@ -1,3 +1,3 @@
 from models.training import train
 
-train("data.h5", epochs=1)
+train("E:\datasets\midi\converted", epochs=20)

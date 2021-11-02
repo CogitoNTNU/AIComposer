@@ -1,29 +1,30 @@
 import numpy as np
-from random import shuffle
+import os
+from random import choice, randint, shuffle
 from config import SEQUENCE_LENGTH
+
+def load_song(path):
+    with open(path, "rb") as f:
+        data = np.load(f)
+        data = data.reshape((-1, 128*3))
+    return data
+
 def generator(datapath="", batch_size=64):
-    with open(datapath, "rb") as f:
-        data = np.load(f, allow_pickle=True)
-        data = [song.reshape((-1, 128*3)) for song in data]
+
+    paths = os.listdir(datapath)
 
     x_train_array = []
     y_train_array = []
 
-    while True:
-        # Gets all possible combinations of song index and predicted note indices
-        indices = []
-        for i, song_array in enumerate(data):
-            for j in range(len(song_array)):
-                indices.append((i, j))
 
-        # Randomized indices
+    while True:
+        song_array = load_song(os.path.join(datapath, choice(paths)))
+
+        length = song_array.shape[0]
+        indices = list(range(length))
         shuffle(indices)
 
-        # Iterate through index pairs
-        for index_pair in indices:
-            song, note_index = index_pair
-            song_array = data[song]
-
+        for note_index in indices:
             start_index = note_index-(SEQUENCE_LENGTH-1)
             if (start_index < 0):
                 values_before_predicted = song_array[:note_index]
