@@ -7,6 +7,7 @@ def convert_all_midi_files_in_folder(folder_path, output_filename="data", save_i
     paths = find_midi_files.get_midi_files(folder_path)
     numpy_song_list = []
     count = len(paths)
+    print(count, "count")
     for i, path in enumerate(paths[2062:]):
         print(i, "of",count, ": ", path)
         try:
