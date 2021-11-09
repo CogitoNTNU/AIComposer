@@ -1,5 +1,6 @@
 from music21 import *
 from music21 import converter, note
+from mido import MidiFile
 from dataprocessing.find_midi_files import get_midi_files
 import cv2
 import time
@@ -15,6 +16,12 @@ def convert_file(filename, save_note_image=False):
     :param save_note_image: whether to save the numpy arrays as an image or not
     :return: A numpy array that represents the midi file
     """
+    mid = MidiFile(filename)
+    song_length = mid.length
+    if song_length > 60*10:
+        raise ValueError("File too long")
+    elif song_length < 10:
+        raise ValueError("File too short")
     file = converter.parse(filename)
     instruments = file.parts
     time_signs = []

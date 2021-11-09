@@ -1,3 +1,3 @@
 from models.training import train
 
-train("converted", epochs=20)
+train("E:\datasets\midi\converted", epochs=200, continue_training=True)
