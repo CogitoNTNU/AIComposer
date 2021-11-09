@@ -2,7 +2,8 @@ from dataprocessing.convert_all_midi_in_folder import convert_all_midi_files_in_
 import os
 
 # convert_all_midi_files_in_folder("E:\datasets\midi\\0", output_filename="E:\datasets\midi\converted", save_individually=True)
-convert_all_midi_files_in_folder_mp("E:\datasets\midi\\0", output_filename="E:\datasets\midi\converted")
+if __name__ == '__main__':
+    convert_all_midi_files_in_folder_mp(f"E:\datasets\midi", output_filename="E:\datasets\midi\converted")
 
 # if __name__ == '__main__':
 #     # test multiprocessing speedup
