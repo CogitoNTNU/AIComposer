@@ -1,17 +1,15 @@
 import numpy as np
 from dataprocessing import find_midi_files, midi_to_numpy
-from config import SEQUENCE_LENGTH
 from pathlib import Path
 import os
 from multiprocessing import Pool, cpu_count
 import functools
 
 
-def convert_all_midi_files_in_folder(folder_path, output_filename="data", save_individually=False):
+def convert_all_midi_files_in_folder(folder_path, output_filename="data", save_individually=False, start_index = 0):
     paths = find_midi_files.get_midi_files(folder_path)
     numpy_song_list = []
     count = len(paths)
-    start_index = 2062
     for i, path in enumerate(paths[start_index:]):
         print(i+start_index, "of",count, ": ", path)
         try:

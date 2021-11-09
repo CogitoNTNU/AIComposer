@@ -1,3 +1,3 @@
 from models.training import train
-
-train("E:\datasets\midi\converted", epochs=200, continue_training=True)
+from config import CONVERTED_PATH
+train(CONVERTED_PATH, epochs=20, continue_training=False)

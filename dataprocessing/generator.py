@@ -1,12 +1,12 @@
 import numpy as np
 import os
-from random import choice, randint, shuffle
-from config import SEQUENCE_LENGTH
+from random import choice, shuffle
+from config import SEQUENCE_LENGTH, MIDI_ARR_SIZE, NUM_NOTES
 
 def load_song(path):
     with open(path, "rb") as f:
         data = np.load(f)
-        data = data.reshape((-1, 128*3))
+        data = data.reshape((-1, NUM_NOTES * MIDI_ARR_SIZE))
     return data
 
 def generator(datapath="", batch_size=64):
