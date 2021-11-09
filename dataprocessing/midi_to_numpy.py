@@ -20,7 +20,7 @@ def convert_file(filename, save_note_image=False):
     f.open(filename)
     f.read()
 
-    tracks = [t for t in m.tracks if not any([e.channel == 10 for e in t.events])]
+    tracks = [t for t in m.tracks if not any([e.channel == 10 for e in f.events])]
     score = music21.stream.Score()
     music21.midi.translate.midiTracksToStreams(tracks,
                                                inputM21=score,
