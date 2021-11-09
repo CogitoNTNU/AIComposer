@@ -1,3 +1,3 @@
-from models.predict import predict_new_song
+from models.predict import predict_new_song, continue_song
 
-predict_new_song(0.1, "most_accurate")
+continue_song(0.4, "most_accurate")

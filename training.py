@@ -1,3 +1,3 @@
 from models.training import train
 
-train("/Users/ulisman/Desktop/python copy/cogito/AIComposer/output", epochs=25)
+train("E:\datasets\midi\converted", epochs=200, continue_training=True)
