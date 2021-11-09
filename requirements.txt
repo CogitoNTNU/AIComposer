@@ -4,6 +4,7 @@ pandas
 numpy
 matplotlib
 mido
+keras
 pygame
 opencv-python
 tensorflow

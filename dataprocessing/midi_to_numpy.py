@@ -1,5 +1,4 @@
 from music21 import *
-import music21.midi
 from music21 import converter, note
 from dataprocessing.find_midi_files import get_midi_files
 import cv2
@@ -16,28 +15,6 @@ def convert_file(filename, save_note_image=False):
     :param save_note_image: whether to save the numpy arrays as an image or not
     :return: A numpy array that represents the midi file
     """
-    file=music21.midi.MidiFile()
-    file.open(filename)
-    file.read()
-
-    tracks = [t for t in file.tracks if not any([e.channel == 10 for e in t.events])]
-
-    score = music21.stream.Score()
-    music21.midi.translate.midiTracksToStreams(tracks,
-                                               inputM21=score,
-                                               forceSource=False,
-                                               quantizePost=False,
-                                               ticksPerQuarter=file.ticksPerQuarterNote,
-                                               quarterLengthDivisors=(4, 3),
-                                               )
-
-
-
-
-
-
-
-
     file = converter.parse(filename)
     instruments = file.parts
     time_signs = []
