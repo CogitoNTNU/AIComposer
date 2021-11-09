@@ -19,7 +19,7 @@ def numpy_to_midi(array, output_path='test_output.mid'):
     last_time = 0
 
     for i, time_step in enumerate(array):
-        print(i, sum(time_step))
+        #print(i, sum(time_step))
         for j, note_arr in enumerate(time_step):
             volume = int(note_arr[2] * 127)
             if (note_arr[0] and not curr_notes[j]):

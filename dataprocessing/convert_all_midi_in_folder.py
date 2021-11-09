@@ -36,7 +36,7 @@ def convert_midi_file(path,  output_filename="data"):
 
         with open(os.path.join(output_filename, str(Path(os.path.basename(path)).with_suffix(".h5"))), "wb") as f:
             np.save(f, numpy_arr)
-
+    
     except Exception as e:
         print(e)
 
