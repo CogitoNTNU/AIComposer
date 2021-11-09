@@ -1,11 +1,10 @@
 import os
-import random
 import cv2
 import numpy as np
 from tensorflow.keras.models import load_model
 from dataprocessing.numpy_to_midi import numpy_to_midi
 from dataprocessing.generator import generator
-from config import SEQUENCE_LENGTH, MODELS_FOLDER, NOTE_IND, NUM_NOTES, VEL_IND
+from config import SEQUENCE_LENGTH, MODELS_FOLDER, NOTE_IND, NUM_NOTES, MIDI_ARR_SIZE
 
 
 def predict(input_array, input_model_filepath, time_steps=1, threshold=0.5,
@@ -20,14 +19,14 @@ def predict(input_array, input_model_filepath, time_steps=1, threshold=0.5,
         predicted_song = []
     while index < time_steps:
         output = model.predict(np.array([current_input]))
-        output = output[0].reshape(NUM_NOTES, 3)
+        output = output[0].reshape(NUM_NOTES, MIDI_ARR_SIZE)
         print("step", index, "of", time_steps, ": max value for this step is ", output.max())
 
         if not use_random_choice:
             output = np.where(output > threshold, 1, 0)
         else:
             uniform = np.random.uniform(0.05, threshold, (NUM_NOTES,1))
-            output = np.where(output**2 > np.repeat(uniform, 3, axis=1), 1, 0)
+            output = np.where(output**2 > np.repeat(uniform, MIDI_ARR_SIZE, axis=1), 1, 0)
 
         output = output.flatten()
 
@@ -42,15 +41,15 @@ def predict(input_array, input_model_filepath, time_steps=1, threshold=0.5,
 def predict_new_song(threshold, model="most_accurate",
                      output_image="predicted_music.png",
                      output_midi="predicted_music.mid"):
-    input_arr = np.ones((SEQUENCE_LENGTH - 1, NUM_NOTES, 3))
-    input_arr = input_arr.reshape((SEQUENCE_LENGTH - 1, NUM_NOTES * 3))
+    input_arr = np.ones((SEQUENCE_LENGTH - 1, NUM_NOTES, MIDI_ARR_SIZE))
+    input_arr = input_arr.reshape((SEQUENCE_LENGTH - 1, NUM_NOTES * MIDI_ARR_SIZE))
 
     prediction = predict(input_arr,
                          os.path.join(MODELS_FOLDER, model),
                          threshold=threshold, time_steps=400)
 
     prediction_reshaped = prediction.reshape(
-        (- 1, NUM_NOTES, 3))
+        (- 1, NUM_NOTES, MIDI_ARR_SIZE))
     cv2.imwrite(output_image,
                 prediction_reshaped[:, :, NOTE_IND].T * 255)
     numpy_to_midi(prediction_reshaped, output_midi)
@@ -67,7 +66,7 @@ def continue_song(threshold, model="most_accurate",
                          include_input_in_song=True)
 
     prediction_reshaped = prediction.reshape(
-        (- 1, NUM_NOTES, 3))
+        (- 1, NUM_NOTES, MIDI_ARR_SIZE))
     cv2.imwrite(output_image,
                 prediction_reshaped[:, :, NOTE_IND].T * 255)
     numpy_to_midi(prediction_reshaped, output_midi)

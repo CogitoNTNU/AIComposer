@@ -21,7 +21,7 @@ def numpy_to_midi(array, output_path='test_output.mid'):
     for i, time_step in enumerate(array):
         print(i, sum(time_step))
         for j, note_arr in enumerate(time_step):
-            volume = int(note_arr[2] * 127)
+            volume = 127
             if (note_arr[0] and not curr_notes[j]):
                 delta_time = abs_time - last_time
                 track.append(Message('note_on', note=j, velocity=volume,
