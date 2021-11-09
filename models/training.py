@@ -19,9 +19,6 @@ def train(data_filepath, epochs=1, model_filename="model", continue_training=Fal
         mode='max',
         save_best_only=True,
         verbose=True)
-<<<<<<< HEAD
-    model.fit(gen, epochs=epochs, steps_per_epoch=10000//BATCH_SIZE, batch_size=BATCH_SIZE, callbacks=[model_checkpoint_callback])
-=======
     model_checkpoint_callback_loss = ModelCheckpoint(
         filepath=os.path.join(MODELS_FOLDER, "least_loss"),
         monitor='loss',
@@ -30,7 +27,6 @@ def train(data_filepath, epochs=1, model_filename="model", continue_training=Fal
         verbose=True)
 
     model.fit(gen, epochs=epochs, steps_per_epoch=4000000//BATCH_SIZE, batch_size=BATCH_SIZE, callbacks=[model_checkpoint_callback_accr, model_checkpoint_callback_loss])
->>>>>>> master
 
     os.makedirs(MODELS_FOLDER, exist_ok=True)
     model.save(os.path.join(MODELS_FOLDER, model_filename))
