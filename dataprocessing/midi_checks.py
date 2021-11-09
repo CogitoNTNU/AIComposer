@@ -10,6 +10,7 @@ def list_of_instruments(midi):
     return all_instu
 
 
+
 # open midi file
 def open_midi(path):
     midi_file=midi.midiFile()

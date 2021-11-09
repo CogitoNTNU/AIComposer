@@ -4,7 +4,7 @@ import cv2
 from midi_to_numpy import convert_file
 from numpy_to_midi import numpy_to_midi
 
-first_arr = convert_file("..\midi_filer\OTD5YA.mid")
+first_arr = convert_file("..\midi_filer\drums.mid")
 
 numpy_to_midi(first_arr)
 
