@@ -5,7 +5,7 @@ from pygame import midi
 from mido import MidiFile
 from models.predict import predict_new_song
 
-filename = "E:\projects\AIComposer\dataprocessing\..\midi_filer\8.mid"
+filename = "midi_filer/8.mid"
 filename = "test_output.mid"
 filename = "E:\projects\AIComposer\dataprocessing\..\midi_filer\AT.mid"
 
@@ -58,10 +58,11 @@ def main():
     while running:
         if timerInit:
             starter = time.time()
+            print("staaaarter")
             timerInit = False
         if filePlaying:
             total = time.time()
-            progress = ((total-starter)*100)/song_length
+            progress = ((total - starter)*100)/song_length
             progress = progress/100
             
         screen.fill((255, 255, 255))
@@ -90,11 +91,13 @@ def main():
                         filePlaying = True
                         starter = time.time() - (total-starter)
                 elif gen_button_x <= mouse[0] <= (gen_button_x + genX) and gen_button_y <= mouse[1] <= (gen_button_y + genY):
-                    predict_new_song(0.1, "most_accurate", output_midi="application/generatedSong.mid")
-                    pygame.mixer.music.load("application/generatedSong.mid")
-                    mid = MidiFile("application/generatedSong.mid")
+                    predict_new_song(0.1, "most_accurate", output_midi="midi_filer/test.mid")
+                    pygame.mixer.music.load("midi_filer/test.mid")
+                    mid = MidiFile("midi_filer/test.mid")
                     song_length = mid.length
-                    timerInit = False
+                    print(song_length)
+                    timerInit = True
+                    pygame.mixer.music.play()
         mouse = pygame.mouse.get_pos()
         pygame.display.flip()
 
