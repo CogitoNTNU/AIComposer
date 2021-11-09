@@ -16,7 +16,7 @@ def train(data_filepath, epochs=1, model_filename="model"):
         mode='max',
         save_best_only=True,
         verbose=True)
-    model.fit(gen, epochs=epochs, steps_per_epoch=1000000//BATCH_SIZE, batch_size=BATCH_SIZE, callbacks=[model_checkpoint_callback])
+    model.fit(gen, epochs=epochs, steps_per_epoch=1000//BATCH_SIZE, batch_size=BATCH_SIZE, callbacks=[model_checkpoint_callback])
 
     os.makedirs(MODELS_FOLDER, exist_ok=True)
     model.save(os.path.join(MODELS_FOLDER, model_filename))

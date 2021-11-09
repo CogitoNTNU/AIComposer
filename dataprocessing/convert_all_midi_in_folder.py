@@ -7,7 +7,7 @@ def convert_all_midi_files_in_folder(folder_path, output_filename="data", save_i
     paths = find_midi_files.get_midi_files(folder_path)
     numpy_song_list = []
     count = len(paths)
-    for i, path in enumerate(paths[2062:]):
+    for i, path in enumerate(paths):
         print(i, "of",count, ": ", path)
         try:
             numpy_arr = midi_to_numpy.convert_file(path, save_note_image=True)
