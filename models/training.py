@@ -11,7 +11,7 @@ def train(data_filepath, epochs=1, model_filename="model", continue_training=Fal
         model = load_model(os.path.join(MODELS_FOLDER, "most_accurate"))
     else:
         model = get_model(input_shape=(SEQUENCE_LENGTH-1, NUM_NOTES * MIDI_ARR_SIZE), output_shape=(NUM_NOTES*MIDI_ARR_SIZE))
-
+    print(model.summary())
     model_checkpoint_callback_accr = ModelCheckpoint(
         filepath=os.path.join(MODELS_FOLDER, "most_accurate"),
         monitor='accuracy',
@@ -25,7 +25,7 @@ def train(data_filepath, epochs=1, model_filename="model", continue_training=Fal
         save_best_only=True,
         verbose=True)
 
-    model.fit(gen, epochs=epochs, steps_per_epoch=4000000//BATCH_SIZE, batch_size=BATCH_SIZE, callbacks=[model_checkpoint_callback_accr, model_checkpoint_callback_loss])
+    model.fit(gen, epochs=epochs, steps_per_epoch=1000000//BATCH_SIZE, batch_size=BATCH_SIZE, callbacks=[model_checkpoint_callback_accr, model_checkpoint_callback_loss])
 
     os.makedirs(MODELS_FOLDER, exist_ok=True)
     model.save(os.path.join(MODELS_FOLDER, model_filename))

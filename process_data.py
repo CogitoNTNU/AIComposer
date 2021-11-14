@@ -3,7 +3,8 @@ from config import CONVERTED_PATH, MIDI_FOLDER
 import os
 
 if __name__ == '__main__':
-    convert_all_midi_files_in_folder_mp(MIDI_FOLDER, output_filename=CONVERTED_PATH)
+    for c in "1234567890abcdef":
+        convert_all_midi_files_in_folder_mp(os.path.join(MIDI_FOLDER, c), output_filename=CONVERTED_PATH)
 
 # if __name__ == '__main__':
 #     # test multiprocessing speedup
