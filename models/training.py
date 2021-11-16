@@ -1,6 +1,6 @@
 import os
 from models.get_model import get_model
-from config import SEQUENCE_LENGTH, MODELS_FOLDER, NUM_NOTES, BATCH_SIZE, MIDI_ARR_SIZE
+from config import SEQUENCE_LENGTH, MODELS_FOLDER, NUM_NOTES, BATCH_SIZE, MIDI_ARR_SIZE, STEPS_PR_EPOCHS
 from dataprocessing.generator import generator
 from tensorflow.keras.callbacks import ModelCheckpoint
 from tensorflow.keras.models import load_model
@@ -25,7 +25,7 @@ def train(data_filepath, epochs=1, model_filename="model", continue_training=Fal
         save_best_only=True,
         verbose=True)
 
-    model.fit(gen, epochs=epochs, steps_per_epoch=100000//BATCH_SIZE, batch_size=BATCH_SIZE, callbacks=[model_checkpoint_callback_accr, model_checkpoint_callback_loss])
+    model.fit(gen, epochs=epochs, steps_per_epoch=STEPS_PR_EPOCHS//BATCH_SIZE, batch_size=BATCH_SIZE, callbacks=[model_checkpoint_callback_accr, model_checkpoint_callback_loss])
 
     os.makedirs(MODELS_FOLDER, exist_ok=True)
     model.save(os.path.join(MODELS_FOLDER, model_filename))

@@ -10,6 +10,12 @@ BATCH_SIZE = 128
 # The training learning rate
 LEARNING_RATE = 0.0001333
 
+# The number of epochs to train
+EPOCHS = 2000
+
+# The number of steps pr epochs
+STEPS_PR_EPOCHS = 1000000
+
 # Total number of different notes. Midi files supports 128
 NUM_NOTES = 128
 
@@ -60,4 +66,4 @@ instruments = {
 }
 
 # Which instrument to use when converting from numpy to midi
-INSTRUMENT = instruments["piano"]
+INSTRUMENT = instruments["gunshot"]

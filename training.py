@@ -1,3 +1,3 @@
 from models.training import train
-from config import CONVERTED_PATH
-train(CONVERTED_PATH, epochs=2000, continue_training=True)
+from config import CONVERTED_PATH, EPOCHS
+train(CONVERTED_PATH, epochs=EPOCHS, continue_training=True)
