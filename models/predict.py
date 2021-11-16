@@ -76,6 +76,7 @@ def save_songs_and_images(song_array, folder, include_input_in_songs=False):
 
 def predict_new_song(temperature, note_frequency, model="most_accurate",
                      batch_size=1,
+                     length=400,
                      predict_folder="predicted"):
     input_arr = np.zeros(
         (batch_size, SEQUENCE_LENGTH - 1, NUM_NOTES, MIDI_ARR_SIZE))
@@ -89,7 +90,7 @@ def predict_new_song(temperature, note_frequency, model="most_accurate",
     prediction = predict(input_arr,
                          os.path.join(MODELS_FOLDER, model),
                          note_frequency=note_frequency,
-                         temperature=temperature, time_steps=400)
+                         temperature=temperature, time_steps=length)
 
     prediction_reshaped = prediction.reshape(
         (batch_size, - 1, NUM_NOTES, MIDI_ARR_SIZE))
@@ -98,6 +99,7 @@ def predict_new_song(temperature, note_frequency, model="most_accurate",
 
 def continue_song(temperature, note_frequency, model="most_accurate",
                   batch_size=1,
+                  length=400,
                   song_folder="E:\datasets\midi\converted",
                   predict_folder="predicted", include_input_in_song=True):
     gen = generator(song_folder, batch_size)
@@ -105,7 +107,7 @@ def continue_song(temperature, note_frequency, model="most_accurate",
     prediction = predict(gen.__next__()[0],
                          os.path.join(MODELS_FOLDER, model),
                          temperature=temperature, note_frequency=note_frequency,
-                         time_steps=400,
+                         time_steps=length,
                          include_input_in_song=include_input_in_song)
 
     os.makedirs(predict_folder, exist_ok=True)
