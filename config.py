@@ -66,4 +66,4 @@ instruments = {
 }
 
 # Which instrument to use when converting from numpy to midi
-INSTRUMENT = instruments["gunshot"]
+INSTRUMENT = instruments["acoustic bass"]
