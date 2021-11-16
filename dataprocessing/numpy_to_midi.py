@@ -1,4 +1,5 @@
 from mido import MidiFile, MidiTrack, Message
+from config import INSTRUMENT
 
 def numpy_to_midi(array, output_path='test_output.mid'):
     """
@@ -9,7 +10,7 @@ def numpy_to_midi(array, output_path='test_output.mid'):
     mid = MidiFile()
     track = MidiTrack()
     mid.tracks.append(track)
-    track.append(Message('program_change', program=3, time=0))
+    track.append(Message('program_change', program=INSTRUMENT, time=0))
 
     ticks_per_beat = mid.ticks_per_beat
     ticks_per_measure = 4 * ticks_per_beat
