@@ -11,9 +11,15 @@ from config import SEQUENCE_LENGTH, MODELS_FOLDER, NOTE_IND, NUM_NOTES, \
 def sample(preds, note_frequency=1, temperature=1):
     sampled = []
     for pred in preds:
+        included = np.where(pred > 0.9)
+        not_included = np.where(pred < 0.03)
+        pred[included] = 0
+        pred[not_included] = 0
         total_pred_sum = round(np.sum(pred) * note_frequency)
+
         if not total_pred_sum:
             pred[:] = 0
+            pred[included] = 1
             sampled.append(pred)
             continue
         pred = np.asarray(pred).astype('float64')
@@ -24,6 +30,7 @@ def sample(preds, note_frequency=1, temperature=1):
         over0 = np.where(probas > 0)
         pred[:] = 0
         pred[over0] = 1
+        pred[included] = 1
         sampled.append(pred)
     return np.array(sampled)
 
