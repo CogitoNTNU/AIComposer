@@ -30,7 +30,7 @@ MIDI_FOLDER = your dataset path
 CONVERTED_PATH = your converted dataset path
 ```
 #### running
-Run process_data.py to start the training. 
+Run process_data.py to start the processing. 
  
 ## Training
 We strongly advise training on a GPU, as it greatly accelerates the training speed.
