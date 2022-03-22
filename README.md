@@ -76,3 +76,5 @@ It will also at the end of every epoch save the most accurate model to MODELS_FO
   A higher temperature will mean a more creative and chaotic end song, 
   while a higher note frequency will simply mean more notes.
  
+## Results
+https://soundcloud.com/espen-fosseide/sets/ai-generated-music?utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing
